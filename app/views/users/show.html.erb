@@ -1,22 +1,34 @@
-<%= render 'books/list', books: @books %>
-
+<%= render 'books/list', book: @book, user: @user %>
           <!--左側ここまで-->
-
-
-
-              <!--<div class="col-8 offset-md-1">-->
-              <!--  <h2>Books</h2>-->
-              <!--  % @books.each do |@book| % -->
-              <!--  <table class="table table-hover table-inverse">-->
-              <!--    <tr>-->
-              <!--      <th>%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %></th>-->
-              <!--      <th> %= @book.title % </th>-->
-              <!--      <th> %= @book.body % </th>-->
-              <!--    </tr>-->
-              <!--  </table>-->
-              <!--</div>-->
-
-              <!--  % end % -->
+    <div class="col-md-8 offset-md-1">
+      <h2>Books</h2>
+      <table class="table table-hover table-inverse">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Title</th>
+            <th>Opinion</th>
+            <th colspan="3"></th>
+          </tr>
+          <tbody>
+          <% @user.books.each do |book| %>
+            <tr>
+              <td>
+                <%= link_to user_path(book.user.id) do %>
+                <%= attachment_image_tag book.user, :profile_image, :fill, 40, 40, format: 'jpeg', fallback: "no_image.jpg" %>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to book_path(book.id) do %>
+                <%= book.title %>
+                <% end %>
+              </td>
+              <td><%= book.body %></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </thead>
+      </table>
     </div>
-  </div>
+    </div>
 </div>

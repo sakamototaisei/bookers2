@@ -1,1 +1,29 @@
-<h1>投稿編集</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+    <% if @book.errors.any? %>
+      <%= @book.errors.count %>
+      <% @book.errors.full_messages.each do |message| %>
+        <%= message %>
+      <% end %>
+    <% end %>
+      <h1>Editing Book</h1>
+
+      <%= form_with model: @book, local:true do |f| %>
+      <div class="form-group">
+        <label>Title</label><br />
+        <%= f.text_field :title %><br />
+      </div>
+      <div class="form-group">
+        <label>Opinion</label><br />
+        <%= f.text_area :body %>
+      </div>
+      <div class="form-group">
+        <%= f.submit "Update Book", class: 'btn btn-success' %>
+      </div>
+      <% end %>
+      <%= link_to "Show", book_path(@book) %> |
+      <%= link_to "Back", books_path %>
+    </div>
+  </div>
+</div>
