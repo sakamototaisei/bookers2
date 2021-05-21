@@ -35,7 +35,7 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     if current_user.id != @book.user.id
       flash[:notice] = "権限がありません"
-      redirect_to users_path
+      redirect_to books_path
     end
   end
 
