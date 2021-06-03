@@ -2,6 +2,11 @@ class BooksController < ApplicationController
 
   # before_action :ensure_correct_user, {only: [:edit,:update]}
 
+  def index
+    @book = Book.new
+    @books = Book.all.order(created_at: :desc)
+    @user = current_user
+  end
 
   def create
     @book = Book.new
@@ -18,17 +23,12 @@ class BooksController < ApplicationController
     end
   end
 
-  def index
-    @book = Book.new
-    @books = Book.all.order(created_at: :desc)
-    @user = current_user
-  end
 
   def show
     @book = Book.find(params[:id])
     @book_new = Book.new
-    # @books = Book.all
     @user = @book.user
+    @post_comment = PostComment.new
   end
 
   def edit
