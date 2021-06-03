@@ -31,21 +31,32 @@
                 </td>
               <% end %>
                 <td>
-                  コメント件数：<%= @book.post_comments.count %>
+                <% if @book.favorited_by?(current_user) %>
+                  <%= link_to book_favorites_path(@book), method: :delete do %>
+                    ❤<%= @book.favorites.count %>
+                  <% end %>
+                <% else %>
+                  <%= link_to book_favorites_path(@book), method: :post do %>
+                    ♡<%= @book.favorites.count %>
+                  <% end %>
+                </td>
+                <% end %>
+                <td>
+                  コメント件数：<%= @book.book_comments.count %>
                 </td>
             </tr>
-            <% @book.post_comments.each do |post_comment| %>
+            <% @book.book_comments.each do |book_comment| %>
             <tr>
               <td>
-                <%= attachment_image_tag post_comment.user, :profile_image, :fill, 40, 40, format: 'jpeg', fallback: "no_image.jpg" %><br />
-                <%= link_to user_path(@user) do %>
-                <%= post_comment.user.name %>
+                <%= attachment_image_tag book_comment.user, :profile_image, :fill, 40, 40, format: 'jpeg', fallback: "no_image.jpg" %><br />
+                <%= link_to user_path(book_comment.user) do %>
+                <%= book_comment.user.name %>
                 <% end %>
               </td>
-              <td><%= post_comment.comment %></td>
-              <% if post_comment.user == current_user %>
+              <td><%= book_comment.comment %></td>
+              <% if book_comment.user == current_user %>
               <td>
-                <%= link_to book_post_comment_path(post_comment.book, post_comment),
+                <%= link_to book_book_comment_path(book_comment.book, book_comment),
                 class: "btn btn-sm btn-danger", method: :delete do %>Destroy
                 <% end %>
               </td>
@@ -54,7 +65,7 @@
             <% end %>
       </table>
         <div class="new-momment">
-          <%= form_with(model:[@book, @post_comment], local: true) do |f| %>
+          <%= form_with(model:[@book, @book_comment], local: true) do |f| %>
             <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %><br>
             <%= f.submit "送信する" %>
           <% end %>

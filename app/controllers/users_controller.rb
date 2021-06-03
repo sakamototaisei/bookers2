@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @book = Book.new
-    @post_comment = PostComment.new
+    @book_comment = BookComment.new
   end
 
 
