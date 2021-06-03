@@ -1,7 +1,5 @@
 class UsersController < ApplicationController
 
-  # before_action :ensure_correct_user, {only: [:edit, :update]}
-
 
   def index
     @book = Book.new
@@ -17,33 +15,6 @@ class UsersController < ApplicationController
     @book = Book.new
     @book_comment = BookComment.new
   end
-
-
-  # def new
-  #   @user = User.new
-  # end
-
-  # def create
-  #   @user = User.new(
-  #     name: params[:name],
-  #     email: params[:email],
-  #     password: params[:password]
-  #     )
-  #   if @user.save
-  #     session[:user_id] = @user.id
-  #     flash[:notice] = "Welcome! You have signed up successfully."
-  #   else
-  #     render new_user_session
-  #   end
-  # end
-
-  # def logout
-  #   session[:user_id] = nill
-  #   flash[:notice] = "Signed out successfully."
-  # end
-
-
-
 
   def edit
     @user = User.find(params[:id])
@@ -62,13 +33,6 @@ class UsersController < ApplicationController
       render :edit
     end
   end
-
-  # def ensure_correct_user
-  #   if current_user.id != params[:id].to_i
-  #     flash[:notice] = "権限がありません"
-  #     redirect_to users_path
-  #   end
-  # end
 
 
 

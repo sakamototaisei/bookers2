@@ -17,15 +17,36 @@
           </tr>
            <tr>
              <th>introduction</th>
-            <th><%= user.introduction %></th>
+             <th><%= user.introduction %></th>
+          </tr>
+          <tr>
+            <th>follows</th>
+            <th>
+              <%= link_to user_followings_path(user.id) do %>
+              <%= user.followings.count %>
+              <% end %>
+            </th>
+          </tr>
+          <tr>
+            <th>followers</th>
+            <th>
+              <%= link_to user_followers_path(user.id) do %>
+              <%= user.followers.count %>
+              <% end %>
+            </th>
           </tr>
         </table>
+    <% unless current_user?(user) %>
+      <% if current_user.following?(user) %>
+        <%= link_to user_relationships_path(user.id), class:"btn btn-md btn-block btn-info mt-4", method: :delete do %>フォローを外す<% end %>
+      <% else %>
+        <%= link_to user_relationships_path(user.id), class:"btn btn-md btn-block btn-success mt-4", method: :post do %>フォローする<% end %>
+      <% end %>
 
-    <!--% if book.user.id == current_user.id %>-->
       <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block" do %>
           <i class="fas fa-user-cog "></i>
       <% end %>
-    <!--% end %>-->
+    <% end %>
         <h2 class="mt-3">New book</h2>
         <%= form_with model: book, local:true do |f| %>
           <label>Title</label><br />
