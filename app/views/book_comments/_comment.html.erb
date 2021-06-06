@@ -11,7 +11,7 @@
     <% if book_comment.user == current_user %>
     <td>
       <%= link_to book_book_comment_path(book_comment.book, book_comment),
-      class: "btn btn-sm btn-danger", method: :delete do %>Destroy
+      class: "btn btn-sm btn-danger", method: :delete, remote: true do %>Destroy
       <% end %>
     </td>
   </tr>
@@ -19,7 +19,7 @@
 <% end %>
 </table>
   <!--<div class="new-momment">-->
-    <%= form_with(model:[book, book_comment], local: true) do |f| %>
+    <%= form_with(model:[book, book_comment], remote: true) do |f| %>
     <%= f.text_area :comment, size:"90x5" ,placeholder: "コメントをここに" %><br>
     <%= f.submit "送信する" %>
     <% end %>
