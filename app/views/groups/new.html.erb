@@ -1,0 +1,30 @@
+
+  <div class="containar">
+  <div class="row">
+    <div class="container col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0">
+      <h1>Create Group</h1>
+      <div class="form-body p-4">
+        <!--% if @user.errors.any? %>-->
+        <!--  %= @user.errors.count %>error prohibited this obj from being saved:-->
+        <!--  % @user.errors.full_messages.each do |message| %>-->
+        <!--    %= message %>-->
+        <!--  % end %>-->
+        <!--% end %>-->
+        <%= form_with model: @group, local:true do |f| %>
+        <h3>グループ名</h3>
+          <div class="input-group">
+          <%= f.text_field :name, class:"form-control", placeholder:"name" %>
+          </div>
+        <h3>紹介文</h3>
+          <%= f.text_area :introduction, class:"form-control", placeholder:"introduction" %>
+          <hr>
+        <h3>グループ画像</h3>
+          <div class="input-group">
+            <!--%= f.attachment_field :profile_image, placeholder: "image" %>-->
+          </div>
+          <%= f.submit "Create Group", class:"btn btn-lg btn-block btn-info mt-4" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
